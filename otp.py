@@ -5,7 +5,8 @@ import random as rd
 import pyotp
 
 
-totp = pyotp.TOTP("JBSWY3DPEHPK3PXP")
+secret = pyotp.random_base32()
+totp = pyotp.TOTP(secret) 
 filename = 'otp_auth/twilliokey.txt'
 account_sid = 'AC8247b456a32ed3486802b73ef45b6a6b'
 try:
@@ -21,12 +22,14 @@ def sendotp():
 
     message = client.messages.create(body='Hi there your otp is '+otp,
                                     from_='+13608032876',
-                                    to='+918688833274'
+                                    to='+919866866572'
                                     )
     return otp
 otp = sendotp()
-input_otp = int(input('enter otp  :  '))
-if totp.verify(input_otp):
+input_otp = (input('enter otp  :  '))
+
+print(otp)
+if otp == input_otp:
     print('access granted')
 else:
     print('access denied')
