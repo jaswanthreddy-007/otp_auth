@@ -7,15 +7,17 @@ import pyotp
 
 secret = pyotp.random_base32()
 totp = pyotp.TOTP(secret) 
-filename = 'otp_auth/twilliokey.txt'
+filename = 'twilliokey.txt'
 account_sid = 'AC8247b456a32ed3486802b73ef45b6a6b'
-# try:
-#         with open(filename, 'r') as f:
-#             auth_token= f.read().strip()
-#except FileNotFoundError:
- #   print("'%s' file not found" % filename)
-#auth_token = 616fdcc1b3277cbf6ebc207c0abcffdc
-client = Client(account_sid, "616fdcc1b3277cbf6ebc207c0abcffdc")
+try:
+        with open(filename, 'r') as f:
+            auth_token= f.read().strip()
+except FileNotFoundError:
+   print("'%s' file not found" % filename)
+
+
+# print(auth_token)
+client = Client(account_sid, auth_token)
 
 
 def sendotp():
